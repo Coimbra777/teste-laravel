@@ -22,8 +22,7 @@ class ContactController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string',
             'email' => 'required|email|unique:contacts,email',
-            'address' => 'required|string',
-            'phone' => 'required|string',
+            'phone' => 'required|numeric'
         ]);
 
         return Contact::create($validatedData);
@@ -41,8 +40,7 @@ class ContactController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string',
             'email' => 'required|email|unique:contacts,email,' . $contact->id,
-            'address' => 'required|string',
-            'phone' => 'required|string',
+            'phone' => 'required|numeric',
         ]);
 
         $contact->update($validatedData);
@@ -53,7 +51,7 @@ class ContactController extends Controller
 
     public function destroy(string $id)
     {
-        $contact = Contact::findOrFail($id);
+        $contact = Contact::find($id);
         $contact->delete();
 
         return response()->json(null, 204);
