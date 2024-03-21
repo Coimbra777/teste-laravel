@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\ContactController;
+use App\Http\Controllers\ContactViewController;
 
-Route::get('/', [ContactController::class, 'index']);
+
+
+Route::get('/', [ContactViewController::class, 'index']);
 
 
 // Route::get('/', function () {

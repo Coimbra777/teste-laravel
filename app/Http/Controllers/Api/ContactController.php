@@ -6,15 +6,15 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Contact;
-use Inertia\Inertia;
 
 class ContactController extends Controller
 {
-  
+
     public function index()
     {
-       $contacts = Contact::all(); 
-        return Inertia::render('Contact', ['contacts' => $contacts]); 
+        
+        $contacts = Contact::all();
+        return response()->json(['data' => $contacts], 201);
     }
 
     public function store(Request $request)
@@ -50,7 +50,7 @@ class ContactController extends Controller
         return $contact;
     }
 
-  
+
     public function destroy(string $id)
     {
         $contact = Contact::findOrFail($id);
