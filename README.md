@@ -14,7 +14,7 @@ git clone https://github.com/Coimbra777/teste-laravel.git
 ```
 Navegue até o diretório do projeto clonado:
 ```
-cd app-laravel
+cd teste-laravel
 ```
 
 Crie o arquivo .env :
