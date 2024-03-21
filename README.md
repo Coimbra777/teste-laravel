@@ -16,6 +16,12 @@ Navegue até o diretório do projeto clonado:
 ```
 cd app-laravel
 ```
+
+Crie o arquivo .env :
+```
+cp .env.example .env
+```
+
 Execute o seguinte comando para iniciar os contêineres Docker e construir as imagens:
 ```
 docker compose up -d --build
@@ -24,10 +30,7 @@ Instale as dependências do Composer executando o seguinte comando:
 ```
 docker compose exec app composer install
 ```
-Copie o arquivo de ambiente de exemplo .env.example para .env:
-```
-docker compose exec app cp .env.example .env
-```
+
 Gere a chave de criptografia do Laravel executando o seguinte comando:
 ```
 docker compose exec app php artisan key:generate
@@ -45,6 +48,17 @@ Execute as migrações do banco de dados com o seguinte comando:
 ```
 docker compose exec app php artisan migrate
 ```
+Execute o servidor:
+```
+docker compose exec app php artisan serve
+```
+
+Abra outro terminal e execute:
+```
+npm run dev
+```
+para executar o frontend da aplicação.
+
 Acesso Local
 Depois de seguir as etapas acima, você pode acessar o projetolocalmente no seguinte endereço:
 
