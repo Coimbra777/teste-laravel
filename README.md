@@ -52,9 +52,10 @@ Execute o servidor:
 ```
 docker compose exec app php artisan serve
 ```
-
 Abra outro terminal e execute:
 ```
+docker compose exec app bash
+npm install
 npm run dev
 ```
 para executar o frontend da aplicação.
