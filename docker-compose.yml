@@ -1,3 +1,4 @@
+version: "3.3"
 
 services:
     # image project
@@ -5,6 +6,15 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
+            args:
+                - user=carlos
+                - uid=1000
+                - NODE_VERSION=14
+                - NPM_VERSION=7
+                - CURL_VERSION=latest
+                - INSTALL_NODE=true
+                - INSTALL_NPM=true
+                - INSTALL_CURL=true
         restart: unless-stopped
         working_dir: /var/www/
         volumes:
@@ -29,6 +39,7 @@ services:
     # db mysql
     db:
         image: mysql:5.7.22
+        platform: linux/x86_64
         restart: unless-stopped
         environment:
             MYSQL_DATABASE: ${DB_DATABASE:-laravel}
@@ -38,7 +49,20 @@ services:
         volumes:
             - ./.docker/mysql/dbdata:/var/lib/mysql
         ports:
-            - "3388:3306"
+            - "3366:3306"
+        networks:
+            - laravel
+
+    # queue
+    queue:
+        image: especializati/laravel9-app
+        restart: unless-stopped
+        command: "php artisan queue:work"
+        volumes:
+            - ./:/var/www
+        depends_on:
+            - redis
+            - app
         networks:
             - laravel
 
